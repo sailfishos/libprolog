@@ -1,5 +1,5 @@
 EXTRA_DIST = autogen.sh build-aux/git-version-gen
-SUBDIRS    = src include extensions ohm-plugin tests
+SUBDIRS    = src include tests
 
 if PD_SUPPORT
 SUBDIRS += doc
