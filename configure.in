@@ -17,9 +17,9 @@ AC_CONFIG_HEADER([src/config.h])
 
 AC_SUBST(ACLOCAL_AMFLAGS, "-I m4")
 
-m4_define(version_major, `echo $VERSION | cut -d. -f1 | cut -d- -f1`)
-m4_define(version_minor, `echo $VERSION | cut -d. -f2 | cut -d- -f1`)
-m4_define(version_patch, `echo $VERSION | cut -d. -f3 | cut -d- -f1`)
+m4_define(version_major, `echo $VERSION | cut -d. -f1 | cut -d- -f1 | cut -d+ -f1`)
+m4_define(version_minor, `echo $VERSION | cut -d. -f2 | cut -d- -f1 | cut -d+ -f1`)
+m4_define(version_patch, `echo $VERSION | cut -d. -f3 | cut -d- -f1 | cut -d+ -f1`)
 
 AC_SUBST(VERSION)
 AC_SUBST(VERSION_MAJOR, version_major)
@@ -140,6 +140,6 @@ echo "       BASE: $PROLOG_BASE"
 echo "     CFLAGS: $PROLOG_CFLAGS"
 echo "       LIBS: $PROLOG_LIBS"
 echo "  STATICLIB: $PROLOG_STATICLIB"
-echo "Libprolog version: $VERSION"
+echo "Libprolog version: $VERSION_FULL"
 echo "      API version: ${LIBPROLOG_VERSION_INFO//:/.}"
 
