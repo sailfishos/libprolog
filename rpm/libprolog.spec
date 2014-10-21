@@ -32,6 +32,7 @@ Development files for %{name}.
 
 
 %build
+echo -n "%{version}" > .tarball-version
 %autogen --disable-static
 %configure --disable-static \
     --enable-extra-warnings
