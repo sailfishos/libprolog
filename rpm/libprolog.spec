@@ -15,7 +15,6 @@ Group:      System/Resource Policy
 License:    LGPLv2.1
 URL:        https://github.com/nemomobile/libprolog
 Source0:    %{name}-%{version}.tar.gz
-Source100:  libprolog.yaml
 Requires:   swi-prolog-library-core
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
