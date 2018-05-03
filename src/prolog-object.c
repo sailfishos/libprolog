@@ -232,8 +232,19 @@ libprolog_collect_result(term_t pl_retval, void *retval)
     switch (PL_term_type(pl_retval)) {
     case PL_VARIABLE:                /* XXX hmm... isn't this an error ? */
         return TRUE;
-        
+
+    /* Version 7 added PL_NIL, PL_BLOB, PL_LIST_PAIR and PL_DICT.
+     * Older versions classify PL_NIL and PL_BLOB as PL_ATOM,
+     * PL_LIST_PAIR as PL_TERM and do not have dicts.
+     *
+     * Knowing this we can handle all new types other than dict (PL_NIL, PL_BLOB,
+     * PL_LIST_PAIR) with old implementation.
+     */
+    case PL_NIL:
+    case PL_BLOB:
     case PL_ATOM:                                    /* [] is an atom... */
+
+    case PL_LIST_PAIR:
     case PL_TERM:
         if (!PL_is_list(pl_retval))
             goto invalid;
