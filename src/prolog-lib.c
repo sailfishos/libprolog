@@ -57,7 +57,6 @@ static char *pl_argv[] = {
     "-L16k",                                   /* local stack size */
     "-G16k",                                   /* global stack size */
     "-T16k",                                   /* trail stack size */
-    "-A16k",                                   /* argument stack size */
 };
 
 
@@ -83,6 +82,7 @@ prolog_init(char *argv0,
     int    argc, status;
 
     (void)argv0;
+    (void)asize;
 
     if (initialized)
         return EBUSY;
@@ -123,7 +123,6 @@ prolog_init(char *argv0,
     snprintf(lstack, sizeof(lstack), "-L%dk", lsize ?: 16);
     snprintf(gstack, sizeof(gstack), "-G%dk", gsize ?: 16);
     snprintf(tstack, sizeof(tstack), "-T%dk", tsize ?: 16);
-    snprintf(astack, sizeof(astack), "-A%dk", asize ?: 16);
 
     if (bootfile != NULL)
         argv = pl_argv;
@@ -141,7 +140,6 @@ prolog_init(char *argv0,
     pl_argv[++argc] = lstack;
     pl_argv[++argc] = gstack;
     pl_argv[++argc] = tstack;
-    pl_argv[++argc] = astack;
 
     libprolog_clear_errors();
 

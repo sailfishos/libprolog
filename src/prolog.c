@@ -1318,6 +1318,12 @@ collect_result(qid_t qid, term_t pl_retval, void *retval)
     case PL_FLOAT:
         return !PL_get_float(pl_retval, (double *)retval);
 
+    /* Version 7 added PL_NIL, PL_BLOB, PL_LIST_PAIR and PL_DICT.
+     * Older versions classify PL_NIL and PL_BLOB as PL_ATOM,
+     * PL_LIST_PAIR as PL_TERM and do not have dicts. */
+    case PL_NIL:
+    case PL_BLOB:
+        /* handle new PL_NIL and PL_BLOB as if they were PL_ATOM */
     case PL_ATOM:
         if (PL_is_list(pl_retval))              /* [] is an atom... */
             goto list;
@@ -1334,6 +1340,8 @@ collect_result(qid_t qid, term_t pl_retval, void *retval)
         *(void **)retval = NULL;
         return 0;
 
+    case PL_LIST_PAIR:
+        /* handle new PL_LIST_PAIR as if it was PL_TERM */
     case PL_TERM:
         if (!PL_is_list(pl_retval))
             goto invalid;

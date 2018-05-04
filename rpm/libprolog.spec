@@ -1,17 +1,17 @@
 Name:       libprolog
 
 Summary:    A convenience library Nokia policy engine prolog library
-Version:    1.1.10
+Version:    1.2.0
 Release:    1
 Group:      System/Resource Policy
-License:    LGPLv2.1
-URL:        https://github.com/nemomobile/libprolog
+License:    LGPLv2+
+URL:        https://git.merproject.org/mer-core/libprolog
 Source0:    %{name}-%{version}.tar.gz
-Requires:   swi-prolog-library-core
+Requires:   swi-prolog-library-core >= 7.0
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(glib-2.0)
-BuildRequires:  pkgconfig(swi-prolog)
+BuildRequires:  pkgconfig(swipl) >= 7.0
 
 %description
 The prolog convenience library contains a small set of functions that
@@ -54,10 +54,11 @@ rm -rf %{buildroot}
 %{_libdir}/*.so.*
 %{_datadir}/libprolog/*
 %dir %{_datadir}/libprolog
-%doc README COPYING INSTALL AUTHORS NEWS ChangeLog
+%doc COPYING
 
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/prolog/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*
+%doc README COPYING INSTALL AUTHORS NEWS ChangeLog
