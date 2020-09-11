@@ -43,7 +43,7 @@ make %{?jobs:-j%jobs}
 %install
 rm -rf %{buildroot}
 %make_install
-
+rm -f %{buildroot}/%{_libdir}/*.la
 
 %post -p /sbin/ldconfig
 
