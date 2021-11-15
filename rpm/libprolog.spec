@@ -3,9 +3,8 @@ Name:       libprolog
 Summary:    A convenience library Nokia policy engine prolog library
 Version:    1.2.0
 Release:    1
-Group:      System/Resource Policy
 License:    LGPLv2+
-URL:        https://git.merproject.org/mer-core/libprolog
+URL:        https://github.com/sailfishos/libprolog
 Source0:    %{name}-%{version}.tar.gz
 Requires:   swi-prolog-library-core >= 7.0
 Requires(post): /sbin/ldconfig
@@ -20,7 +19,6 @@ are supposed to make embedding the SWI-Prolog interpreter easier.
 
 %package devel
 Summary:    Development files for %{name}
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
@@ -36,8 +34,7 @@ echo -n "%{version}" > .tarball-version
 %autogen --disable-static
 %configure --disable-static \
     --enable-extra-warnings
-
-make %{?jobs:-j%jobs}
+%make_build
 
 
 %install
@@ -51,14 +48,14 @@ rm -f %{buildroot}/%{_libdir}/*.la
 
 %files
 %defattr(-,root,root,-)
+%license COPYING
 %{_libdir}/*.so.*
 %{_datadir}/libprolog/*
 %dir %{_datadir}/libprolog
-%doc COPYING
 
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/prolog/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*
-%doc README COPYING INSTALL AUTHORS NEWS ChangeLog
+%doc README INSTALL AUTHORS NEWS ChangeLog
